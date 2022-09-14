@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package>
+  <name>rrbot_mujoco</name>
+  <version>1.0.0</version>
+  <description>rrbot_mujoco</description>
+  <maintainer email="dleins@techfak.uni-bielefeld.de">David P. Leins</maintainer>
+
+  <license>BSD</license>
+
+  <url type="bugtracker">https://github.com/DavidPL1/mujoco_ros_demos/issues</url>
+  <url type="repository">https://github.com/DavidPL1/mujoco_ros_demos</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <run_depend>mujoco_ros</run_depend>
+  <run_depend>mujoco_ros_control</run_depend>
+  <run_depend>rrbot_control</run_depend>
+  <run_depend>rrbot_description</run_depend>
+  <run_depend>urdf2mjcf</run_depend>
+  <run_depend>xacro</run_depend>
+
+  <export>
+  </export>
+</package>

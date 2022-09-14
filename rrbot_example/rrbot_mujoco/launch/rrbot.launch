@@ -1,0 +1,46 @@
+<launch>
+
+  <arg name="paused" default="false"/>
+  <arg name="headless" default="false"/>
+  <arg name="num_sim_steps" default="-1"/>
+  <arg name="verbose" default="false"/>
+  <arg name="use_urdf2mjcf" default="false" />
+  <arg name="rviz" default="false" />
+  <arg name="modelfile" default="$(find rrbot_description)/xml/rrbot.xml"/>
+
+  <param name="/use_sim_time" value="true"/>
+
+  <env name="ROSCONSOLE_FORMAT" value="[${severity}] [${time}] [${logger}] [${node}]: ${message}"/>
+  <env if="$(arg verbose)" name="ROSCONSOLE_CONFIG_FILE"
+       value="$(find mujoco_ros)/rosconsole.config"/>
+
+    <!-- Load the URDF into the ROS Parameter Server -->
+  <param name="robot_description"
+    command="$(find xacro)/xacro '$(find rrbot_description)/urdf/rrbot.xacro'" />
+
+  <group if="$(arg use_urdf2mjcf)" >
+    <node name="urdf2mjcf_converter" pkg="urdf2mjcf" type="urdf2mjcf_ros" >
+      <param name="urdf_source" value="robot_description" />
+      <param name="xml_destination" value="/mujoco_xml" />
+    </node>
+  </group>
+
+
+  <rosparam file="$(find rrbot_control)/config/rrbot_control.yaml" subst_value="true" />
+
+  <node pkg="mujoco_ros" type="mujoco_server" name="mujoco_server" output="screen" >
+    <param name="modelfile" type="str"  value="$(arg modelfile)" />
+    <param name="wait_for_xml"   value="$(arg use_urdf2mjcf)" />
+    <param name="unpause"   value="$(eval not arg('paused'))" />
+    <param name="visualize"   value="$(eval not arg('headless'))" />
+    <param name="num_steps"   value="$(arg num_sim_steps)" />
+  </node>
+
+  <group if="$(arg rviz)">
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find rrbot_description)/launch/rrbot.rviz"/>
+  </group>
+
+    <!-- ros_control rrbot launch file -->
+  <include file="$(find rrbot_control)/launch/rrbot_control.launch" />
+  <include file="$(find rrbot_control)/launch/rrbot_rqt.launch" />
+</launch>

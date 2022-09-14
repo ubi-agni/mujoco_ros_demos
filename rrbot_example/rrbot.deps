@@ -1,0 +1,9 @@
+repositories:
+  mujoco_ros_pkgs:
+    type: git
+    url: git@github.com:DavidPL1/mujoco_ros_pkgs.git
+    version: noetic-devel
+  urdf2mjcf:
+    type: git
+    url: https://github.com/balandbal/urdf2mjcf.git
+    version: main

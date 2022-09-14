@@ -1,0 +1,214 @@
+{
+  "keys": {},
+  "groups": {
+    "mainwindow": {
+      "keys": {
+        "geometry": {
+          "repr(QByteArray.hex)": "QtCore.QByteArray(b'01d9d0cb00030000000008db0000024600000d1800000578000008db0000026b00000d180000057800000000000000000f00000008db0000026b00000d1800000578')",
+          "type": "repr(QByteArray.hex)",
+          "pretty-print": "       F   x   k   x        k   x"
+        },
+        "state": {
+          "repr(QByteArray.hex)": "QtCore.QByteArray(b'000000ff00000000fd0000000200000002000004f400000274fc0100000001fb00000050007200710074005f0070006f00730065005f0076006900650077005f005f0050006f007300650056006900650077005f005f0031005f005f0047004c00560069006500770057006900640067006500740100000000000004f40000000000000000000000030000043e000002e2fc0100000007fc00000000000001930000013f00fffffffa000000000200000001fb00000042007200710074005f0070006c006f0074005f005f0050006c006f0074005f005f0031005f005f00440061007400610050006c006f00740057006900640067006500740100000000ffffffff0000008a00fffffffb0000006a007200710074005f0072006f0062006f0074005f007300740065006500720069006e0067005f005f0052006f0062006f0074005300740065006500720069006e0067005f005f0031005f005f0052006f0062006f0074005300740065006500720069006e0067005500690100000000000004650000000000000000fb00000062007200710074005f0072006f0062006f0074005f006d006f006e00690074006f0072005f005f0052006f0062006f0074004d006f006e00690074006f0072005f005f0031005f005f0052006f0062006f00740020004d006f006e00690074006f00720100000000000004650000000000000000fb00000064007200710074005f006d006f0076006500690074005f005f004d006f0076006500690074005f005f0031005f005f005f0070006c007500670069006e0063006f006e007400610069006e00650072005f0074006f0070005f0077006900640067006500740100000000000004f40000000000000000fb00000042007200710074005f007300720076005f005f00530065007200760069006300650073005f005f0031005f005f006d0065007300730061006700650073002e007500690100000000000003f70000000000000000fb00000042007200710074005f006e00610076005f0076006900650077005f005f004e0061007600690067006100740069006f006e0056006900650077005f005f0031005f005f0100000000000004f40000000000000000fb00000058007200710074005f007000750062006c00690073006800650072005f005f005000750062006c00690073006800650072005f005f0031005f005f005000750062006c006900730068006500720057006900640067006500740100000199000002a50000023d00ffffff0000043e0000000000000004000000040000000800000008fc00000001000000030000000100000036004d0069006e0069006d0069007a006500640044006f0063006b00570069006400670065007400730054006f006f006c0062006100720000000000ffffffff0000000000000000')",
+          "type": "repr(QByteArray.hex)",
+          "pretty-print": "                 Prqt_pose_view__PoseView__1__GLViewWidget                       ?                                                                                                              e                                                           e                                                                                                                                                                                                             =   >                                                      "
+        }
+      },
+      "groups": {
+        "toolbar_areas": {
+          "keys": {
+            "MinimizedDockWidgetsToolbar": {
+              "repr": "8",
+              "type": "repr"
+            }
+          },
+          "groups": {}
+        }
+      }
+    },
+    "pluginmanager": {
+      "keys": {
+        "running-plugins": {
+          "repr": "{'rqt_plot/Plot': [1], 'rqt_publisher/Publisher': [1]}",
+          "type": "repr"
+        }
+      },
+      "groups": {
+        "plugin__rqt_moveit__Moveit__1": {
+          "keys": {},
+          "groups": {
+            "plugin": {
+              "keys": {
+                "_splitter": {
+                  "repr(QByteArray.hex)": "QtCore.QByteArray(b'000000ff0000000100000002000000c8000000640100000009010000000200')",
+                  "type": "repr(QByteArray.hex)",
+                  "pretty-print": "         d     "
+                },
+                "splitter_horizontal": {
+                  "repr(QByteArray.hex)": "QtCore.QByteArray(b'000000ff0000000100000002000000640000006e0100000009010000000200')",
+                  "type": "repr(QByteArray.hex)",
+                  "pretty-print": "       d n     "
+                }
+              },
+              "groups": {}
+            }
+          }
+        },
+        "plugin__rqt_plot__Plot__1": {
+          "keys": {},
+          "groups": {
+            "dock_widget__DataPlotWidget": {
+              "keys": {
+                "dock_widget_title": {
+                  "repr": "'MatPlot'",
+                  "type": "repr"
+                },
+                "dockable": {
+                  "repr": "True",
+                  "type": "repr"
+                },
+                "parent": {
+                  "repr": "None",
+                  "type": "repr"
+                }
+              },
+              "groups": {}
+            },
+            "plugin": {
+              "keys": {
+                "autoscroll": {
+                  "repr": "True",
+                  "type": "repr"
+                },
+                "plot_type": {
+                  "repr": "1",
+                  "type": "repr"
+                },
+                "topics": {
+                  "repr": "''",
+                  "type": "repr"
+                },
+                "x_limits": {
+                  "repr": "[1652185608.7861972, 1652185609.7861972]",
+                  "type": "repr"
+                },
+                "y_limits": {
+                  "repr": "[-1.7204386533854636, 1.620282066566907]",
+                  "type": "repr"
+                }
+              },
+              "groups": {}
+            }
+          }
+        },
+        "plugin__rqt_pose_view__PoseView__1": {
+          "keys": {},
+          "groups": {
+            "dock_widget__GLViewWidget": {
+              "keys": {
+                "dock_widget_title": {
+                  "repr": "'Pose View'",
+                  "type": "repr"
+                },
+                "dockable": {
+                  "repr": "'true'",
+                  "type": "repr"
+                },
+                "parent": {
+                  "repr": "None",
+                  "type": "repr"
+                }
+              },
+              "groups": {}
+            },
+            "plugin": {
+              "keys": {
+                "view_matrix": {
+                  "repr": "'[[0.7071067690849304, 0.29883623123168945, -0.6408563852310181, 0.0], [-0.7071067690849304, 0.29883623123168945, -0.6408563852310181, 0.0], [0.0, 0.9063078165054321, 0.42261824011802673, 0.0], [0.0, -3.0, -17.5, 1.0]]'",
+                  "type": "repr"
+                }
+              },
+              "groups": {}
+            }
+          }
+        },
+        "plugin__rqt_publisher__Publisher__1": {
+          "keys": {},
+          "groups": {
+            "dock_widget__PublisherWidget": {
+              "keys": {
+                "dock_widget_title": {
+                  "repr": "'Message Publisher'",
+                  "type": "repr"
+                },
+                "dockable": {
+                  "repr": "True",
+                  "type": "repr"
+                },
+                "parent": {
+                  "repr": "None",
+                  "type": "repr"
+                }
+              },
+              "groups": {}
+            },
+            "plugin": {
+              "keys": {
+                "publishers": {
+                  "repr": "\"[{'topic_name': '/joint2_position_controller/command', 'type_name': 'std_msgs/Float64', 'rate': 100.0, 'enabled': False, 'publisher_id': 4, 'counter': 7218, 'expressions': {'/joint2_position_controller/command/data': 'sin(i/100)'}}, {'topic_name': '/joint1_position_controller/command', 'type_name': 'std_msgs/Float64', 'rate': 100.0, 'enabled': False, 'publisher_id': 5, 'counter': 2549, 'expressions': {'/joint1_position_controller/command/data': 'sin(i/100)'}}]\"",
+                  "type": "repr"
+                }
+              },
+              "groups": {}
+            }
+          }
+        },
+        "plugin__rqt_robot_monitor__RobotMonitor__1": {
+          "keys": {},
+          "groups": {
+            "plugin": {
+              "keys": {
+                "splitter": {
+                  "repr(QByteArray.hex)": "QtCore.QByteArray(b'000000ff00000001000000030000006400000064000000c80100000009010000000200')",
+                  "type": "repr(QByteArray.hex)",
+                  "pretty-print": "       d d       "
+                }
+              },
+              "groups": {}
+            }
+          }
+        },
+        "plugin__rqt_robot_steering__RobotSteering__1": {
+          "keys": {},
+          "groups": {
+            "plugin": {
+              "keys": {
+                "topic": {
+                  "repr": "'/cmd_vel'",
+                  "type": "repr"
+                },
+                "vw_max": {
+                  "repr": "'3'",
+                  "type": "repr"
+                },
+                "vw_min": {
+                  "repr": "'-3'",
+                  "type": "repr"
+                },
+                "vx_max": {
+                  "repr": "'1'",
+                  "type": "repr"
+                },
+                "vx_min": {
+                  "repr": "'-1'",
+                  "type": "repr"
+                }
+              },
+              "groups": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}

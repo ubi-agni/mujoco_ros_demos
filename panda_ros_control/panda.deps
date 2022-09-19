@@ -7,3 +7,7 @@ repositories:
     type: git
     url: https://github.com/frankaemika/franka_ros.git
     version: develop
+  franka_ros_mujoco:
+    type: git
+    url: https://github.com/DavidPL1/franka_ros_mujoco
+    version: noetic-devel

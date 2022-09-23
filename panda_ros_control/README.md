@@ -5,7 +5,7 @@
 
 ## Prerequisites
 
-- MuJoCo version 2.2.1 (might also work with greater version)
+- MuJoCo version <= 2.2.2
 
 ## Installing
 
@@ -16,4 +16,3 @@
 5. Run `roslaunch mujoco_panda_waving panda_auto_waving.launch`.
 
 Play around with the launchfile arguments, if you like.
-

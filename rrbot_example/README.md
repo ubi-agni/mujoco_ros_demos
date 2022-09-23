@@ -5,8 +5,8 @@
 
 ## Prerequisites
 
-- MuJoCo version 2.2.1
-- MuJoCo 2.2.1 python bindings (`pip install mujoco==2.2.1`)
+- MuJoCo version <= 2.2.2
+- MuJoCo 2.2.2 python bindings (`pip install mujoco==2.2.2`)
 
 ## Installing
 
@@ -16,8 +16,8 @@
 4. Build catkin workspace with `catkin b rrbot_mujoco` and source the devel space
 5. Run `roslaunch rrbot_mujoco rrbot_launch`
 
-by streaming to the joint position controller command topics (check the boxes in the spawned rqt window for a sine signal) the two joints of the robot can be controlled. 
+by streaming to the joint position controller command topics (check the boxes in the spawned rqt window for a sine signal) the two joints of the robot can be controlled.
 
 ### rrbot\_launch
 Set `use_urdf2mjcf:=true` to generate the MuJoCo xml directly from the URDF with [urdf2mjcf](https://github.com/balandbal/urdf2mjcf).
-Set `rviz:=true` to start an rviz visualisation. 
+Set `rviz:=true` to start an rviz visualisation.

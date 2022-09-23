@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="ns"          default="/"      doc="Namespace this robot is in" />
+  <arg name="rviz"        default="false"  doc="Should rviz be spawned?" />
+  <arg name="arm_id"      default="panda" doc="Name of the panda robot to spawn" />
+  <arg name="use_gripper" default="true"  doc="Should a franka hand be mounted on the flange?" />
+  <arg name="controller"  default="cartesian_impedance_example_controller" doc="Which example controller should be started? (One of {cartesian_impedance,model,force,joint_position,joint_velocity}_example_controller)" />
+  <arg name="publish_trajectory"  default="true" doc="Should cartesian coordinates be published as goals for the cartesian controller?" />
+
+  <!-- Since robot position and orientation are defined by the xml file, these option currently do not change the robot position, but should match the position and orientation of the model file -->
+  <arg name="x"           default="0"     doc="How far forward to place the base of the robot in [m]?" />
+  <arg name="y"           default="0"     doc="How far leftwards to place the base of the robot in [m]?" />
+  <arg name="z"           default="0"     doc="How far upwards to place the base of the robot in [m]?" />
+  <arg name="roll"        default="0"     doc="How much to rotate the base of the robot around its X-axis in [rad]?" />
+  <arg name="pitch"       default="0"     doc="How much to rotate the base of the robot around its Y-axis in [rad]?" />
+  <arg name="yaw"         default="0"     doc="How much to rotate the base of the robot around its Z-axis in [rad]?" />
+
+  <group ns="$(arg ns)">
+    <param name="robot_description"
+          command="xacro $(find franka_description)/robots/panda/panda.urdf.xacro
+                    gazebo:=true
+                    hand:=$(arg use_gripper)
+                    arm_id:=$(arg arm_id)
+                    xyz:='$(arg x) $(arg y) $(arg z)'
+                    rpy:='$(arg roll) $(arg pitch) $(arg yaw)'">
+    </param>
+
+    <rosparam file="$(find franka_mujoco)/config/franka_hw_sim.yaml" subst_value="true" />
+    <rosparam file="$(find franka_mujoco)/config/sim_controllers.yaml" subst_value="true" />
+    <rosparam file="$(find franka_mujoco)/config/default_mjplugin_config.yaml" subst_value="true" />
+
+    <param name="m_ee" value="0.76" if="$(arg use_gripper)" />
+
+    <!-- Spawn required ROS controllers -->
+    <node pkg="controller_manager"
+          type="spawner"
+          name="$(arg arm_id)_gripper_spawner"
+          if="$(arg use_gripper)"
+          args="franka_gripper"
+          respawn="false"
+    />
+
+    <!-- spawns the controller after the robot was put into its initial joint pose -->
+    <node pkg="controller_manager"
+          type="spawner"
+          name="$(arg arm_id)_controller_spawner"
+          respawn="false"
+          output="screen"
+          args="--wait-for initialized franka_state_controller $(arg controller) "
+    />
+
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    <node name="joint_state_publisher" type="joint_state_publisher" pkg="joint_state_publisher" >
+      <rosparam param="source_list">[franka_state_controller/joint_states, franka_gripper/joint_states] </rosparam>
+      <param name="rate" value="30"/>
+      <param name="tf_prefix" type="string" value="$(eval arg('ns') if arg('ns') else '')" />
+    </node>
+
+    <node name="auto_movement_$(arg arm_id)"
+          pkg="mujoco_panda_waving"
+          type="movement_with_marker.py"
+          if="$(eval arg('controller') == 'cartesian_impedance_example_controller' and arg('publish_trajectory'))">
+      <param name="link_name" value="$(arg arm_id)_link0" />
+      <remap to="cartesian_impedance_example_controller/equilibrium_pose" from="equilibrium_pose" />
+    </node>
+
+    <node  pkg="rviz" type="rviz" output="screen" name="rviz_$(arg arm_id)" args="-d $(find franka_example_controllers)/launch/rviz/franka_description_with_marker.rviz" if="$(arg rviz)"/>
+  </group>
+</launch>

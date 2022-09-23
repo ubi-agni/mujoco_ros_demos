@@ -20,4 +20,4 @@ by streaming to the joint position controller command topics (check the boxes in
 
 ### rrbot\_launch
 Set `use_urdf2mjcf:=true` to generate the MuJoCo xml directly from the URDF with [urdf2mjcf](https://github.com/balandbal/urdf2mjcf).
-Set `rviz:=true` to start an rviz visualisation.
+Set `rviz:=true` to start an rviz visualization.

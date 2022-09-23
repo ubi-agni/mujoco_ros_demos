@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package>
+  <name>mujoco_parallel_env_demo</name>
+  <version>1.1.0</version>
+  <description>The mujoco_parallel_env_demo package</description>
+  <maintainer email="dleins@techfak.uni-bielefeld.de">David P. Leins</maintainer>
+
+  <author email="dleins@techfak.de">David P. Leins</author>
+
+  <license>BSD</license>
+
+  <url type="bugtracker">https://github.com/DavidPL1/mujoco_ros_demos/issues</url>
+  <url type="repository">https://github.com/DavidPL1/mujoco_ros_demos</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <run_depend>controller_manager</run_depend>
+  <run_depend>joint_state_controller</run_depend>
+  <run_depend>robot_state_publisher</run_depend>
+
+  <run_depend version_gte="1.1.0">franka_mujoco</run_depend>
+  <run_depend>mujoco_ros_pkgs</run_depend>
+  <run_depend>mujoco_panda_waving</run_depend>
+
+  <export>
+  </export>
+
+</package>

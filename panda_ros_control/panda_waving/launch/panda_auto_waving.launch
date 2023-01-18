@@ -12,6 +12,9 @@
   <arg name="modelfile"   default="$(find franka_mujoco)/assets/picknplace_world.xml" doc="MuJoCo xml file to load. Should define robot model and world." />
   <arg name="headless"    default="false" />
   <arg name="num_sim_steps" default="-1" />
+  <arg name="interactive_marker" default="false" />
+  <arg name="mujoco_plugin_config" default="$(find mujoco_panda_waving)/config/mj_plugins.yaml" doc="Location of param file containing the mujoco plugin config" />
+  <arg name="use_sim_time" doc="should mujoco publish its simulation time as ros time?"/>
 
   <include file="$(find franka_mujoco)/launch/panda.launch" pass_all_args="true" />
 

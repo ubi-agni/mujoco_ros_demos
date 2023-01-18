@@ -3,7 +3,7 @@
 * Author: David P. Leins <dleins@techfak.de>
 * License: BSD 3-Clause License
 
-Example robots and code for using and extending [MuJoCo\_ROS](https://github.com/DavidPL1/mujoco_ros_pkgs.git)
+Example robots and code for using and extending [MuJoCo\_ROS](https://github.com/ubi-agni/mujoco_ros_pkgs.git)
 
 ## Tutorials
 

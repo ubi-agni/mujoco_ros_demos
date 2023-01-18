@@ -5,15 +5,15 @@
 
 ## Prerequisites
 
-- MuJoCo version 2.2.2 (might also work with greater version)
+- MuJoCo (tested with 2.2.0 - 2.3.0)
 
 ## Installing
 
 1. Create catkin workspace (`mkdir -p mj_ros_demo_ws/src && cd mj_ros_demo_ws && catkin init`)
-2. Clone the demo repository into the workspace with `git clone https://github.com/DavidPL1/mujoco_ros_demos src/mujoco_ros_demos`
+2. Clone the demo repository into the workspace with `git clone https://github.com/ubi-agni/mujoco_ros_demos src/mujoco_ros_demos`
 3. Download ros package dependencies into catkin workspace src folder with `vcs import > src/mujoco_ros_demos/panda_ros_control/panda.deps src`
 4. Build catkin workspace with `catkin b mujoco_multi_env_demo` and source the devel workspace.
-5. Run `roslaunch mujoco_multi_env_demo waving_pandas.launch`.
+5. Run `roslaunch mujoco_multi_env_demo waving_pandas.launch use_sim_time:=true`.
 
 
 ## Notes

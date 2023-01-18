@@ -1,7 +1,7 @@
 repositories:
   mujoco_ros_pkgs:
     type: git
-    url: https://github.com/DavidPL1/mujoco_ros_pkgs.git
+    url: https://github.com/ubi-agni/mujoco_ros_pkgs.git
     version: noetic-devel
   franka_ros:
     type: git
@@ -9,5 +9,5 @@ repositories:
     version: develop
   franka_ros_mujoco:
     type: git
-    url: https://github.com/DavidPL1/franka_ros_mujoco
+    url: https://github.com/ubi-agni/franka_ros_mujoco
     version: noetic-devel

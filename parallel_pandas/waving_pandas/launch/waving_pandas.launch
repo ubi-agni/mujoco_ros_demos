@@ -1,41 +1,22 @@
 <?xml version="1.0"?>
 <launch>
 
-  <arg name="verbose"     default="false"  doc="Should more debug output be printed?" />
-  <arg name="unpause"     default="true"  doc="Should the simulation be unpaused on start?" />
-  <arg name="rviz"        default="false"  doc="Should rviz be spawned?" />
-  <arg name="arm_id"      default="panda" doc="Name of the panda robot to spawn" />
-  <arg name="modelfile"   default="$(find franka_mujoco)/assets/picknplace_world.xml" doc="MuJoCo xml file to load. Should define robot model and world." />
-  <arg name="headless"    default="false" />
-  <arg name="num_sim_steps" default="-1" />
-  <arg name="benchmark_time" default="false" />
-  <arg name="num_instances"   default="2" doc="Number of parallel simulations to run." />
+  <arg name="rviz"                 default="false"  doc="Should rviz be spawned?" />
+  <arg name="arm_id"               default="panda"  doc="Name of the panda robot to spawn" />
+  <arg name="num_instances"        default="2"      doc="Number of parallel simulations to run." />
+  <arg name="publish_trajectory"   default="true"   doc="If true will publish cartesian coordinates as controller targets for the cartesian_impedance_example_controller" />
+
+  <arg name="controller"           default="cartesian_impedance_example_controller" />
+  <arg name="modelfile"            default="$(find franka_mujoco)/assets/picknplace_world.xml" doc="MuJoCo xml file to load. Should define robot model and world." />
   <arg name="bootstrap_launchfile" default="$(find mujoco_parallel_env_demo)/launch/bringup_panda.launch" doc="Which launchfile should be run for each namespace" />
-  <arg name="controller" default="cartesian_impedance_example_controller" />
-  <arg name="publish_trajectory" default="true" doc="If true will publish cartesian coordinates as controller targets for the cartesian_impedance_example_controller" />
   <arg name="bootstrap_launchargs" default="[rviz:=false, arm_id:=%(arg ns)_$(arg arm_id), controller:=$(arg controller), publish_trajectory:=$(arg publish_trajectory)]" />
 
   <param name="/use_sim_time" value="true" />
 
-  <!-- Debug output -->
-  <env name="ROSCONSOLE_FORMAT" value="[${severity}] [${time}] [${logger}] [${node}]: ${message}"/>
-  <env if="$(arg verbose)" name="ROSCONSOLE_CONFIG_FILE"
-       value="$(find mujoco_ros)/rosconsole.config"/>
-
   <!-- Bootstrapper node for environments -->
   <node pkg="mujoco_ros" type="ns_bootstrapper.py" name="ns_bootstrapper" output="screen" />
 
-  <node pkg="mujoco_ros" type="mujoco_server" name="mujoco_server" output="screen" >
-    <param name="benchmark_time" value="$(arg benchmark_time)" />
-    <param name="modelfile" type="str"  value="$(arg modelfile)" />
-    <param name="unpause"   value="$(arg unpause)" />
-    <param name="visualize"   value="$(eval not arg('headless'))" />
-    <param name="num_steps"   value="$(arg num_sim_steps)" />
-    <param name="num_simulations"   value="$(arg num_instances)" />
-    <rosparam file="$(find franka_mujoco)/config/initial_joint_states.yaml" subst_value="true" />
-    <param name="bootstrap_launchfile" value="$(arg bootstrap_launchfile)" />
-    <rosparam param="bootstrap_launchargs" subst_value="true">$(arg bootstrap_launchargs)</rosparam>
-  </node>
+  <include file="$(find mujoco_ros)/launch/launch_server.launch" pass_all_args="true" />
 
   <group ns="env0" if="$(eval arg('num_instances') >= 2)">
     <node  pkg="rviz" type="rviz" output="screen" name="rviz_$(arg arm_id)_env0" args="-d $(find mujoco_parallel_env_demo)/launch/rviz/env0_panda.rviz" if="$(arg rviz)"/>

@@ -1,14 +1,6 @@
 <mujoco model="single">
     <option collision="all" timestep="0.001" gravity="0 0 -9.81" cone="elliptic" />
     <compiler angle="radian" />
-	<default>
-		<!--joint limited="false" damping="0.1" stiffness="0" armature="0.0001" user="0"/-->
-		<!--geom solref="0.008 1" solimp="0.95 0.95 0.01" margin="0.001" user="0" condim="6"/-->
-		<!--geom condim="6" solimp="0.99 0.99 0.01" />
-		<motor ctrllimited="false" ctrlrange="-1 1"/>
-		<position ctrllimited="false"/-->
-
-    </default>
     <visual>
         <headlight ambient="0.4 0.4 0.4" diffuse="0.4 0.4 0.4" specular="0.0 0.0 0.0" active="1"/>
     </visual>
@@ -37,6 +29,10 @@
                     <joint name="joint2" pos="0 0 0" axis="0 1 0" damping="0.7" />
                     <geom name="link3_geom" pos="0 0 0.45" type="box" size="0.05 0.05 0.5" material="orange"/>
                     <inertial pos="0 0 0.45" mass="1" diaginertia="1.0 1.0 1.0"/>
+                    <body name="camera_link" pos="0 1. 0">
+                        <camera name="camera1" mode="fixed" fovy="80" euler="-90 0 -90"/>
+                        <geom name="camera_link_geom" pos="0 0 0" type="box" size="0.05 0.05 0.05" material="red"/>
+                    </body>
                 </body>
             </body>
         </body>
@@ -46,4 +42,5 @@
         <exclude body1="link2" body2="link3" />
         <exclude body1="link1" body2="link3" />
     </contact>
+
 </mujoco>

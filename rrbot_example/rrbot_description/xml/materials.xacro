@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<robot>
+    <asset>
+        <!-- <mesh name="hokuyo" file="../meshes/hokuyo.dae" /> -->
+        <texture builtin="checker" height="512" name="texplane" rgb1=".2 .3 .4" rgb2=".1 .15 .2" type="2d" width="512" />
+        <material name="MatPlane" reflectance="0.5" shininess="0.01" specular="0.1" texrepeat="1 1" texture="texplane" texuniform="true" />
+        <material name="black" rgba="0.0 0.0 0.0 1.0"/>
+        <material name="blue" rgba="0.0 0.0 0.8 1.0"/>
+        <material name="green" rgba="0.0 0.8 0.0 1.0"/>
+        <material name="grey" rgba="0.2 0.2 0.2 1.0"/>
+        <material name="orange" rgba="1.0 0.423529411765 0.0392156862745 1.0"/>
+        <material name="brown" rgba="0.870588235294 0.811764705882 0.764705882353 1.0"/>
+        <material name="red" rgba="0.8 0.0 0.0 1.0"/>
+        <material name="white" rgba="1.0 1.0 1.0 1.0"/>
+    </asset>
+</robot>

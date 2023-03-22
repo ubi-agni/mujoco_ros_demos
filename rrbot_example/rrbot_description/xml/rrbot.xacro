@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<robot name="rrbot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <!-- Revolute-Revolute Manipulator -->
+    <mujoco model="rrbot">
+        <option collision="all" timestep="0.001" gravity="0 0 -9.81" cone="elliptic" />
+        <compiler angle="radian" />
+        <default>
+            <!--joint limited="false" damping="0.1" stiffness="0" armature="0.0001" user="0"/-->
+            <!--geom solref="0.008 1" solimp="0.95 0.95 0.01" margin="0.001" user="0" condim="6"/-->
+            <!--geom condim="6" solimp="0.99 0.99 0.01" />
+            <motor ctrllimited="false" ctrlrange="-1 1"/>
+            <position ctrllimited="false"/-->
+
+        </default>
+        <visual>
+            <headlight ambient="0.4 0.4 0.4" diffuse="0.4 0.4 0.4" specular="0.0 0.0 0.0" active="1"/>
+        </visual>
+
+        <!-- Constants for robot dimensions -->
+        <xacro:property name="PI" value="3.1415926535897931"/>
+        <xacro:property name="mass" value="1" /> <!-- arbitrary value for mass -->
+        <xacro:property name="width" value="0.1" /> <!-- Square dimensions (widthxwidth) of beams -->
+        <xacro:property name="height1" value="2" /> <!-- Link 1 -->
+        <xacro:property name="height2" value="1" /> <!-- Link 2 -->
+        <xacro:property name="height3" value="1" /> <!-- Link 3 -->
+        <xacro:property name="camera_link" value="0.05" /> <!-- Size of square 'camera' box -->
+        <xacro:property name="axel_offset" value="0.05" /> <!-- Space btw top of beam and the each joint -->
+
+        <!-- Import Rviz colors -->
+        <xacro:include filename="$(find rrbot_description)/xml/materials.xacro" />
+
+        <worldbody>
+            <geom name="ground_plane" type="plane" size="5 5 0.1" material="MatPlane" rgba="1 1 1 1"/>
+            <body name="link1">
+                <geom name="link1_geom" pos="0 0 ${height1/2}" type="box" size="${width/2} ${width/2} ${height1/2}" material="orange"/>
+                <inertial pos="0 0 ${height1/2}" mass="${mass}" diaginertia="${mass / 12.0 * (width*width + height1*height1)} ${mass / 12.0 * (height1*height1 + width*width)} ${mass / 12.0 * (width*width + width*width)}"/>
+                <body name="link2" pos="0 ${width} ${height1 - axel_offset}">
+                    <joint name="joint1" pos="0 0 0" axis="0 1 0" damping="0.7" />
+                    <geom name="link2_geom" pos="0 0 ${height2/2 - axel_offset}" type="box" size="${width/2} ${width/2} ${height2/2}" material="blue"/>
+                    <inertial pos="0 0 ${height2/2 - axel_offset}" mass="${mass}" diaginertia="${mass / 12.0 * (width*width + height2*height2)} ${mass / 12.0 * (height2*height2 + width*width)} ${mass / 12.0 * (width*width + width*width)}" />
+                    <body name="link3" pos="0 ${width} ${height2 - axel_offset*2}">
+                        <joint name="joint2" pos="0 0 0" axis="0 1 0" damping="0.7" />
+                        <geom name="link3_geom" pos="0 0 0.45" type="box" size="${width/2} ${width/2} ${height3/2}" material="orange"/>
+                        <inertial pos="0 0 0.45" mass="${mass}" diaginertia="${mass / 12.0 * (width*width + height3*height3)} ${mass / 12.0 * (height3*height3 + width*width)} ${mass / 12.0 * (width*width + width*width)}" />
+                        <body name="hokuyo_link" pos="0 0 ${height3 - axel_offset/2}">
+                            <geom name="hokuyo_geom" pos="0 0 0" type="box" size="0.05 0.05 0.05" material="orange"/>
+                        </body>
+                        <body name="camera_link" pos="${camera_link} 0 ${height3 - axel_offset * 2}" euler="0 ${-pi/2} ${pi/2}">
+                            <camera name="camera1" mode="fixed" fovy="80" euler="0 0 0"/>
+                            <geom name="camera_link_geom" pos="0 0 0" type="box" size="${camera_link} ${camera_link} ${camera_link}" material="red"/>
+                            <inertial pos="0 0 ${camera_link}" mass="1e-5" diaginertia="1e-6 1e-6 1e-6" />
+                        </body>
+                    </body>
+                </body>
+            </body>
+        </worldbody>
+        <contact>
+            <exclude body1="link1" body2="link2" />
+            <exclude body1="link2" body2="link3" />
+            <exclude body1="link1" body2="link3" />
+        </contact>
+
+    </mujoco>
+</robot>
+

@@ -2,7 +2,7 @@
 
   <arg name="use_urdf2mjcf" default="false" />
   <arg name="rviz" default="false" />
-  <arg name="modelfile" default="$(find rrbot_description)/xml/rrbot.xml"/>
+  <!-- <arg name="modelfile" default="$(find rrbot_description)/xml/rrbot.xml"/> -->
 
   <param name="/use_sim_time" value="true"/>
 
@@ -16,14 +16,18 @@
       <param name="xml_destination" value="/mujoco_xml" />
     </node>
   </group>
+  <group unless="$(arg use_urdf2mjcf)" >
+    <param name="mujoco_xml"
+        command="$(find rrbot_mujoco)/scripts/xacro_pipe $(find rrbot_description)/xml/rrbot.xacro" />
+  </group>
 
 
   <rosparam file="$(find rrbot_control)/config/rrbot_control.yaml" subst_value="true" />
 
   <include file="$(find mujoco_ros)/launch/launch_server.launch" pass_all_args="true" >
-    <arg name="console_config_file" value="$(find mujoco_contact_surface_sensors)/rosconsole.config" />
-    <arg name="wait_for_xml"        value="$(arg use_urdf2mjcf)" />
-    <arg name="/use_sim_time"       value="true" />
+    <arg name="console_config_file" value="$(find mujoco_ros)/config/rosconsole.config" />
+    <arg name="wait_for_xml"        value="true" />
+    <arg name="use_sim_time"        value="true" />
   </include>
 
   <group if="$(arg rviz)">

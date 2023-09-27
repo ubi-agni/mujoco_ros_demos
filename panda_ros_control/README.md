@@ -5,7 +5,8 @@
 
 ## Prerequisites
 
-- MuJoCo (tested with 2.2.0 - 2.3.0)
+- MuJoCo 2.3.6
+- python3-vcstool
 
 ## Installing
 

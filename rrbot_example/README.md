@@ -5,14 +5,15 @@
 
 ## Prerequisites
 
-- MuJoCo (tested with 2.2.0 - 2.3.2)
+- MuJoCo 2.3.6
 - MuJoCo python bindings (`pip install mujoco` and make sure the bindings match the MuJoCo version!)
+- python3-vcstool
 
 ## Installing
 
 1. Create catkin workspace (`mkdir -p mj_ros_demo_ws/src && cd mj_ros_demo_ws && catkin init`)
 2. Clone the demo repository into the workspace with `git clone https://github.com/ubi-agni/mujoco_ros_demos src/mujoco_ros_demos`
-3. Download ros package dependencies into catkin workspace src folder with `vcs import > src/mujoco_ros_demos/rrbot_example/rrbot.deps src`
+3. Download ros package dependencies into catkin workspace src folder with `vcs import src < src/mujoco_ros_demos/rrbot_example/rrbot.deps`
 4. Build catkin workspace with `catkin b rrbot_mujoco` and source the devel space
 5. Run `roslaunch rrbot_mujoco rrbot_launch use_sim_time:=true`
 
@@ -21,6 +22,9 @@ by streaming to the joint position controller command topics (check the boxes in
 ### rrbot\_launch
 Set `use_urdf2mjcf:=true` to generate the MuJoCo xml directly from the URDF with [urdf2mjcf](https://github.com/balandbal/urdf2mjcf).
 Set `rviz:=true` to start an rviz visualization.
+
+> **Warning**
+> The MuJoCo model loading API changed and currently does not support loading models from string until this announced [change](https://github.com/google-deepmind/mujoco/discussions/957#discussioncomment-6328779) is implemented. Thus `use_urdf2mjcf:=true` is not functional at the moment. As a workaround, a dynamic model can be written to file (with absolute paths to meshes, textures, etc.) and then be loaded as usual through the `modelfile` parameter.
 
 # Explanation
 

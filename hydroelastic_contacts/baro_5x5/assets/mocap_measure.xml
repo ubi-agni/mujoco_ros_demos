@@ -1,0 +1,110 @@
+<mujoco model="mocap measure">
+    <option collision="all" timestep="0.001" gravity="0 0 -9.81" cone="elliptic" />
+    <compiler angle="radian" />
+    <statistic extent="1.5" meansize=".05"/>
+    <option timestep="0.001" jacobian="sparse" gravity="0 0 -9.81"/>
+    <size nconmax="3000" njmax="4000"/>
+    <visual>
+        <rgba haze="0.15 0.25 0.35 1"/>
+        <quality shadowsize="4096"/>
+        <map stiffness="700" shadowscale="0.5" fogstart="10" fogend="15" zfar="40" haze="0.3"/>
+        <scale forcewidth="0.001" />
+    </visual>
+
+    <custom>
+        <!-- All custom parameters related to contact surfaces have the prefix cs:: -->
+        <!-- Options are traingles or plygons, though currently only triangles are supported -->
+        <text name="cs::HydroelasticContactRepresentation" data="kTriangle"/>
+        <!-- If this option is enabled, the contact surface will be rendered in sim -->
+        <numeric name="cs::VisualizeSurfaces" data="1"/>
+        <!-- If cs::ApplyContactSurfaceForces is 0 Contact Surfaces are only computed for tactile sensors and standard mujoco contacts are used to compute physics -->
+        <numeric name="cs::ApplyContactSurfaceForces" data="1"/>
+        <!-- Contact properties for each geom: hydroelasticModulus, dissipation, resolutionHint.
+        A rigid object has hydroelasticModulus of 0 and dissipation of 1. 
+        A soft box with a resolution hint of 0 uses a resolution automatically computed by drake. -->
+        <numeric name="cs::measure_tip" data="0 1.0 0.01 0.3 0.3"/>
+        <numeric name="cs::baro_silicone" data="5e4 5.0 0 0.3 0.3"/>
+    </custom>
+
+    <default>
+        <geom contype="1" conaffinity="1" group="1" type="mesh" rgba=".51 .6 .7 1" />
+    </default>
+
+    <visual>
+        <headlight ambient="0.4 0.4 0.4" diffuse="0.4 0.4 0.4" specular="0.0 0.0 0.0" active="1" />
+    </visual>
+
+    <asset>
+        <texture type="skybox" builtin="gradient" rgb1="0.6 0.6 0.6" rgb2="0 0 0" width="512" height="512" />
+        <texture builtin="checker" height="512" name="texplane" rgb1=".2 .3 .4" rgb2=".1 .15 .2" type="2d" width="512" />
+        <material name="MatPlane" reflectance="0.05" shininess="0.01" specular="0.01" texrepeat="1 1" texture="texplane" texuniform="true" />
+    </asset>
+
+    <worldbody>
+        <light directional="true" diffuse=".4 .4 .4" specular="0.1 0.1 0.1" pos="0 0 5.0" dir="0 0 -1" castshadow="false"/>
+        <light directional="true" diffuse=".6 .6 .6" specular="0.2 0.2 0.2" pos="0 0 4" dir="0 0 -1"/>
+        <geom name="ground_plane" type="plane" size="5 5 10" material="MatPlane" rgba="1 1 1 1"/>
+    </worldbody>
+
+    <worldbody>
+        <body name="HDTA_Table" >
+            <geom name="slicer_base" type="box" pos="0 0 0.7" size="4 4 0.7" />
+
+            <body name="body_baro" pos="-0.05 0 1.4">
+                <geom name="leg00"  type="cylinder" pos="-0.1925 -0.0925 0.025" size="0.005 0.03" rgba="0.5 0.5 0.5 1"/>
+                <geom name="leg01"  type="cylinder" pos="-0.1925 0.0925 0.025"  size="0.005 0.03" rgba="0.5 0.5 0.5 1"/>
+                <geom name="leg10"  type="cylinder" pos="0.1925 -0.0925 0.025"  size="0.005 0.03" rgba="0.5 0.5 0.5 1"/>
+                <geom name="leg11"  type="cylinder" pos="0.1925 0.0925 0.025"   size="0.005 0.03" rgba="0.5 0.5 0.5 1"/>
+
+                <geom name="platine"         type="box" pos="0 0 0.05"  size="0.2 0.1 0.005" rgba="0.09 0.77 0.28 1" />
+                <geom name="baro_silicone"     type="box" pos="0.05 0 0.07"  size="0.055 0.055 0.02" rgba="0.5 0.5 0.5 1"/>
+                <geom name="baro_silicone_alt" type="box" pos="0.05 0 0.07"  size="0.055 0.055 0.02" rgba="0.5 0.5 0.5 1" contype="2" conaffinity="2" />
+            </body>
+
+            <body name="tower" pos="0 0 1.4" >
+                <joint name="y-Axis" pos="-3.7 0 2" type="slide" axis="0 1 0" stiffness="0" damping="1000" limited="true" range="-3.7 3.7" />
+                <geom type="box" size="0.3 0.3 1.5" pos="3.7 0.0 1.5"/>
+                <geom type="box" size="0.3 0.3 1.5" pos="-3.7 0.0 1.5" />
+
+                <geom type="box" size="3.7 0.03 0.15" pos="0.0 0.3 2.85" />
+                <geom type="box" size="3.7 0.03 0.15" pos="0.0 -0.3 2.85" />
+
+                <body pos="0 0 2.85" >
+                    <joint name="x-Axis" type="slide" pos="0. 0. 1" axis="1 0 0" stiffness="0" damping="1000" limited="true" range="-2.1 2.1" />
+                    <geom name="bridge_r" type="box" size="0.5 0.27 0.15" pos="0.8 0.0 0.0" />
+                    <geom name="bridge_l" type="box" size="0.5 0.27 0.15" pos="-0.8 0.0 0.0" />
+
+                    <body pos="0 0 -0.5">
+                        <joint name="z-Axis" type="slide" pos="0. 0. 1" axis="0 0 1" stiffness="0" damping="1000" limited="true" range="-1.67 0.0" />
+                        <geom name="x-staff" type="box" size="0.15 0.15 1.5" pos="0.0 0.0 0" />
+
+                        <body name="measure_body" pos="0. 0. -1.55">
+                            <geom type="cylinder" size=".0375 .056" rgba=".5 .5 .5 1" />
+                            <body name="measure_tip_body" pos="0 0 -0.04085">
+                                <!-- <geom name="measure_tip_alt" type="cylinder" size=".0125 .056" rgba=".5 .5 .5 1" contype="2" conaffinity="2" /> -->
+                                <geom name="measure_tip" type="cylinder" size=".0125 .056"/>
+                                <site name="measure_tip_site" type="cylinder" size="0.0125 0.056" pos="0 0 -0" group="0" />
+                            </body>
+                        </body>
+                    </body>
+                </body>
+            </body>
+        </body>
+
+        <body name="mocap" mocap="true" pos="0. 0.0 2.2">
+            <geom type="box" size="0.05 0.05 0.05" rgba="1.0 0 0 1." contype="0" conaffinity="0" />
+            <site name="mocap_site" type="box" size="0.25 0.25 0.25" rgba="1.0 0 0 0" group="0" />
+        </body>
+
+    </worldbody>
+
+    <equality>
+        <weld body1="mocap" body2="measure_body" active="true" solref="0.1 1" solimp=".3 .4 0.01"/>
+    </equality>
+
+    <sensor>
+        <framepos name="pos" objtype="site" objname="mocap_site" />
+        <framepos name="measure_b" objtype="body" objname="measure_body" />
+    </sensor>
+
+</mujoco>

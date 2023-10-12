@@ -1,0 +1,6 @@
+MujocoPlugins:
+  - type: mujoco_ros_mocap/MocapPlugin
+  - type: mujoco_ros_sensors/MujocoRosSensorsPlugin
+  - type: mujoco_contact_surfaces/MujocoContactSurfacesPlugin
+    SurfacePlugins:
+      - { type: mujoco_contact_surface_sensors/FlatTactileSensor, sensorName: "baro_sensor", geomName: "baro_silicone", topicName: "/baro", updateRate: 4.0, visualize: true, use_parallel: false, resolution: 0.022, sampling_resolution: 20 }

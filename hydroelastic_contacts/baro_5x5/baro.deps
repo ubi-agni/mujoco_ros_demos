@@ -1,0 +1,17 @@
+repositories:
+  mujoco_ros_pkgs:
+    type: git
+    url: https://github.com/ubi-agni/mujoco_ros_pkgs.git
+    version: mocap-plugin-msgs
+  mocap_plugin:
+    type: git
+    url: https://github.com/DavidPL1/mujoco_ros_mocap_plugin.git
+    version: noetic-devel
+  mujoco_contact_surfaces:
+    type: git
+    url: https://github.com/ubi-agni/mujoco_contact_surfaces.git
+    version: bounding-volumes
+  tactile_toolbox:
+    type: git
+    url: https://github.com/ubi-agni/tactile_toolbox.git
+    version: melodic-devel

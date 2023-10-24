@@ -10,3 +10,4 @@ Example robots and code for using and extending [MuJoCo\_ROS](https://github.com
 - [RRBot example](rrbot_example/)
 - [Moving the Franka Emika Panda with ROS control](panda_ros_control)
 - [Parallel environments under a single ROS core](parallel_pandas)
+- [Using Hydroelastic Contacts and simulation of tactile sensors in MuJoCo ROS](./hydroelastic_contacts)

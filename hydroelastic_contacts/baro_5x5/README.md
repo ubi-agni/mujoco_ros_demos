@@ -1,4 +1,4 @@
-# Simulation of Tactile Sensors
+# Simulation of a Barometric Tactile Sensor Array
 
 * Author: David P. Leins <dleins@techfak.de>
 * License: BSD 3-Clause License
@@ -6,7 +6,7 @@
 ## Prerequisites
 
 - MuJoCo 2.3.6
-- Drake (tested with 1.12.0 - 1.21.0)
+- Drake (tested with 1.12.0 - 1.22.0)
 
 ## Installing and Running
 

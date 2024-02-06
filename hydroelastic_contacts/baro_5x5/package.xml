@@ -15,7 +15,7 @@
   <buildtool_depend>catkin</buildtool_depend>
   <depend>mujoco_ros</depend>
   <depend>mujoco_contact_surface_sensors</depend>
-  <depend>mujoco_mocap</depend>
+  <depend>mujoco_ros_mocap</depend>
   <depend>mujoco_ros_sensors</depend>
 
 </package>

@@ -13,7 +13,7 @@ catkin_package(
  CATKIN_DEPENDS
   mujoco_ros
   mujoco_contact_surface_sensors
-  mujoco_mocap
+  mujoco_ros_mocap
   mujoco_ros_sensors
 )
 
